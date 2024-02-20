@@ -5,7 +5,7 @@ import {
   FanletterContent,
   FanletterDetail,
   Profile,
-} from "../Styled";
+} from "../styled/Styled";
 
 const Fanletters = ({ item }) => {
   return (

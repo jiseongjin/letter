@@ -6,7 +6,7 @@ import {
   FillContent,
   NameText,
   RegisterButton,
-} from "components/Styled";
+} from "components/styled/Styled";
 import { useState } from "react";
 
 const FanletterWrite = ({ addButton }) => {

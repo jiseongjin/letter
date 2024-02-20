@@ -1,6 +1,6 @@
 import GlobalStyle from "components/GlobalStyle";
 import React, { useState } from "react";
-import { Main, NoFanletter } from "../Styled";
+import { Main, NoFanletter } from "../styled/Styled";
 import Fanletters from "./Fanletters";
 import IveMembers from "./IveMembers";
 import FanletterWrite from "./FanletterWrite";

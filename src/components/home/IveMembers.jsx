@@ -1,5 +1,5 @@
 import { members } from "assets/ivemembers";
-import { MemberNames, NameButton } from "components/Styled";
+import { MemberNames, NameButton } from "components/styled/Styled";
 
 const IveMembers = ({ selectMembers, selectedMember }) => {
   return (
