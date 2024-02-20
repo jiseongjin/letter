@@ -27,6 +27,7 @@ function FanletterMain() {
           }
         );
         dispatch(liginData(response.data));
+        console.log(response.data);
       } catch (error) {
         alert("로그인이 실패했습니다");
         navigate("/");

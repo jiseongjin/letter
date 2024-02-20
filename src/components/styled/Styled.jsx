@@ -210,3 +210,7 @@ export const UserBox = styled.div`
   display: flex;
   gap: 10px;
 `;
+
+export const LogoutText = styled.p`
+  cursor: pointer;
+`;
