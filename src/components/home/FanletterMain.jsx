@@ -9,7 +9,7 @@ import { addLetter } from "../../shared/redux/modules/fanLettersReducer.js";
 
 function FanletterMain() {
   // redux 데이터
-  const reduxData = useSelector((state) => {
+  const lettersData = useSelector((state) => {
     return state.fanLettersReducer;
   });
 
@@ -59,7 +59,7 @@ function FanletterMain() {
 
   // 팬레터 리스트 함수
   const renderFilteredMembers = () => {
-    const filteredLetters = reduxData.filter(
+    const filteredLetters = lettersData.filter(
       (item) => selectedMember === "" || item.iveName === selectedMember
     );
     if (filteredLetters.length > 0) {

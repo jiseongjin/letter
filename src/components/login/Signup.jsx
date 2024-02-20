@@ -30,7 +30,7 @@ function Signup({ toggleForm }) {
       alert(result.data.message);
       toggleForm();
     } catch (error) {
-      console.error("회원가입 오류:", error);
+      alert("회원가입 오류:", error);
     }
   };
 
