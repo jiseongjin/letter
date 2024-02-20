@@ -15,9 +15,9 @@ const Fanletters = ({ item }) => {
         <Fanletter>
           <Profile src={item.avatar} alt="" />
           <FanletterContent>
-            <p>{item.name}</p>
-            <p>{new Date(item.date).toLocaleString()}</p>
-            <FanletterDetail>{item.detail}</FanletterDetail>
+            <p>{item.nickname}</p>
+            <p>{new Date(item.createdAt).toLocaleString()}</p>
+            <FanletterDetail>{item.content}</FanletterDetail>
           </FanletterContent>
         </Fanletter>
       </FanLetterList>

@@ -37,19 +37,19 @@ function DetailFanletter() {
     setOnFix(false);
   };
 
-  const [editText, setEditText] = useState(foundData.detail);
-  const changDetail = (event) => {
+  const [editText, setEditText] = useState(foundData.content);
+  const changContent = (event) => {
     const inputValue = event.target.value;
     setEditText(inputValue);
   };
 
   //수정 완료 버튼
   const addButton = () => {
-    if (foundData.detail === editText) {
+    if (foundData.content === editText) {
       alert("수정된 부분이 없습니다.");
     } else {
       const addFanLetter = reduxData.map((item) =>
-        item.id === foundData.id ? { ...item, detail: editText } : item
+        item.id === foundData.id ? { ...item, content: editText } : item
       );
       dispatch(editedButton(addFanLetter));
       setOnFix(true);
@@ -82,7 +82,7 @@ function DetailFanletter() {
               <time>{new Date(foundData.date).toLocaleString()}</time>
             </LetterUser>
             <DetailIveName>To: {foundData.iveName}</DetailIveName>
-            <Detail disabled={onFix} onChange={changDetail}>
+            <Detail disabled={onFix} onChange={changContent}>
               {editText}
             </Detail>
           </section>

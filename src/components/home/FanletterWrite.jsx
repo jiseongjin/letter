@@ -11,16 +11,16 @@ import { useSelector } from "react-redux";
 
 const FanletterWrite = ({ addButton }) => {
   // 닉네임,내용,보내는 멤버 useState
-  const [detail, setDetail] = useState("");
+  const [content, setContent] = useState("");
   const [iveMember, setIveMember] = useState("안유진");
 
   const loginUser = useSelector((state) => {
     return state.authSlice;
   });
   // 내용 입력
-  const onChangeDetail = (event) => {
+  const onChangeContent = (event) => {
     const inputValue = event.target.value;
-    setDetail(inputValue);
+    setContent(inputValue);
   };
   // 멤버 선택
   const onChangeIveName = (event) => {
@@ -39,8 +39,8 @@ const FanletterWrite = ({ addButton }) => {
         <ContentText
           type="text"
           placeholder="최대 100자까지만 작성할 수 있습니다."
-          value={detail}
-          onChange={onChangeDetail}
+          value={content}
+          onChange={onChangeContent}
         />
       </FillBoxTexts>
       <article>
@@ -57,7 +57,7 @@ const FanletterWrite = ({ addButton }) => {
       </article>
       <RegisterButton
         onClick={() => {
-          addButton({ detail, iveMember, setDetail, loginUser });
+          addButton({ content, iveMember, setContent, loginUser });
         }}
       >
         팬레터 등록
