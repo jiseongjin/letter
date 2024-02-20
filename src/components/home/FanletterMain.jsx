@@ -17,7 +17,13 @@ function FanletterMain() {
   const dispatch = useDispatch();
 
   // 팬레터 추가 버튼
-  const addButton = ({ userName, detail, iveMember }) => {
+  const addButton = ({
+    userName,
+    detail,
+    iveMember,
+    setUserName,
+    setDetail,
+  }) => {
     const newLetter = {
       date: Date(),
       name: userName,
@@ -38,6 +44,8 @@ function FanletterMain() {
       );
     } else {
       dispatch(addLetter(newLetter));
+      setUserName("");
+      setDetail("");
     }
   };
 

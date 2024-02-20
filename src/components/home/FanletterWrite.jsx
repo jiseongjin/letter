@@ -65,7 +65,7 @@ const FanletterWrite = ({ addButton }) => {
       </article>
       <RegisterButton
         onClick={() => {
-          addButton({ userName, detail, iveMember });
+          addButton({ userName, detail, iveMember, setUserName, setDetail });
         }}
       >
         팬레터 등록

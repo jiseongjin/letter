@@ -13,6 +13,7 @@ export const LoginSection = styled.section`
   gap: 20px;
   height: 300px;
   width: 500px;
+  background-color: transparent;
 `;
 
 export const LoginText = styled.p`
@@ -20,7 +21,7 @@ export const LoginText = styled.p`
   margin-bottom: 20px;
 `;
 
-export const LoginBox = styled.article`
+export const LoginBox = styled.form`
   display: flex;
   flex-direction: column;
   gap: 10px;
