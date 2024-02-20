@@ -4,22 +4,19 @@ import {
   FillBox,
   FillBoxTexts,
   FillContent,
-  NameText,
   RegisterButton,
 } from "components/styled/Styled";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const FanletterWrite = ({ addButton }) => {
   // 닉네임,내용,보내는 멤버 useState
-  const [userName, setUserName] = useState("");
   const [detail, setDetail] = useState("");
   const [iveMember, setIveMember] = useState("안유진");
 
-  // 닉네임 입력
-  const onChangeName = (event) => {
-    const inputValue = event.target.value;
-    setUserName(inputValue);
-  };
+  const loginUser = useSelector((state) => {
+    return state.authSlice;
+  });
   // 내용 입력
   const onChangeDetail = (event) => {
     const inputValue = event.target.value;
@@ -35,12 +32,7 @@ const FanletterWrite = ({ addButton }) => {
     <FillBox>
       <FillBoxTexts>
         <FillContent>닉네임:&nbsp;</FillContent>
-        <NameText
-          type="text"
-          placeholder="최대 20글자까지 작성할 수 있습니다."
-          value={userName}
-          onChange={onChangeName}
-        />
+        <p>{loginUser.nickname}</p>
       </FillBoxTexts>
       <FillBoxTexts>
         <FillContent>내용:&nbsp;</FillContent>
@@ -65,7 +57,7 @@ const FanletterWrite = ({ addButton }) => {
       </article>
       <RegisterButton
         onClick={() => {
-          addButton({ userName, detail, iveMember, setUserName, setDetail });
+          addButton({ detail, iveMember, setDetail, loginUser });
         }}
       >
         팬레터 등록

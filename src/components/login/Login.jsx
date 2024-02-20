@@ -8,14 +8,11 @@ import {
   SignupButton,
 } from "components/styled/LoginStyled";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { liginData } from "shared/redux/modules/authSlice";
 
 function Login({ toggleForm }) {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [login, setLogin] = useState({
+  const [isLoggedin, setIsLoggedin] = useState({
     id: "",
     password: "",
   });
@@ -25,22 +22,20 @@ function Login({ toggleForm }) {
     try {
       const result = await axios.post(
         "https://moneyfulpublicpolicy.co.kr/login",
-        login
+        isLoggedin
       );
-      console.log(result);
-      dispatch(liginData(result.data));
-      localStorage.setItem("token", result.data.accessToken);
+      localStorage.setItem("accessToken", result.data.accessToken);
       alert("로그인 되었습니다");
-      navigate(`home/${result.data.userId}`);
+      navigate("/home");
     } catch (error) {
-      alert(error);
+      alert("아이디,비밀번호를 확인 해 주세요");
     }
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setLogin({
-      ...login,
+    setIsLoggedin({
+      ...isLoggedin,
       [name]: value,
     });
   };
@@ -51,14 +46,14 @@ function Login({ toggleForm }) {
         <LoginBox onSubmit={onSubmitHandler}>
           <LoginInputText
             name="id"
-            value={login.id}
+            value={isLoggedin.id}
             onChange={handleInputChange}
             type="text"
             placeholder="아이디 (4~10글자)"
           />
           <LoginInputText
             name="password"
-            value={login.password}
+            value={isLoggedin.password}
             onChange={handleInputChange}
             type="password"
             placeholder="비밀번호 (4~15글자)"

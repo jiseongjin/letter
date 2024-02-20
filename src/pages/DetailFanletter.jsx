@@ -35,7 +35,6 @@ function DetailFanletter() {
   // 수정 버튼
   const editButton = () => {
     setOnFix(false);
-    console.log("생각중");
   };
 
   const [editText, setEditText] = useState(foundData.detail);
@@ -54,7 +53,7 @@ function DetailFanletter() {
       );
       dispatch(editedButton(addFanLetter));
       setOnFix(true);
-      navigate("/");
+      navigate("/home");
     }
   };
   // 삭제 버튼
@@ -64,12 +63,12 @@ function DetailFanletter() {
         (item) => item.id !== foundData.id
       );
       dispatch(deleteLetter(updatFanletters));
-      navigate("/");
+      navigate("/home");
     }
   };
   return (
     <>
-      <Link to={"/"}>
+      <Link to={"/home"}>
         <MoveHomeButton>홈으로</MoveHomeButton>
       </Link>
       <DetailMain>

@@ -53,11 +53,6 @@ export const FillContent = styled.p`
   align-items: center;
 `;
 
-export const NameText = styled.input`
-  width: 100%;
-  padding: 5px 10px;
-`;
-
 export const ContentText = styled.input`
   height: 80px;
   width: 100%;
@@ -197,4 +192,21 @@ export const NoFanletter = styled.p`
   border-radius: 5px;
   color: white;
   font-size: 17px;
+`;
+
+export const LayoutHeader = styled.header`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: gray;
+  height: 30px;
+  a {
+    text-decoration-line: none;
+    color: black;
+  }
+`;
+
+export const UserBox = styled.div`
+  display: flex;
+  gap: 10px;
 `;

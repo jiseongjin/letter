@@ -1,50 +1,61 @@
 import GlobalStyle from "components/GlobalStyle";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Main, NoFanletter } from "../styled/Styled";
 import Fanletters from "./Fanletters";
 import IveMembers from "./IveMembers";
 import FanletterWrite from "./FanletterWrite";
 import { useDispatch, useSelector } from "react-redux";
 import { addLetter } from "../../shared/redux/modules/fanLettersReducer.js";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { liginData } from "shared/redux/modules/authSlice";
 
 function FanletterMain() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("accessToken");
+        const response = await axios.get(
+          "https://moneyfulpublicpolicy.co.kr/user",
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        dispatch(liginData(response.data));
+      } catch (error) {
+        alert("로그인이 실패했습니다");
+        navigate("/");
+      }
+    };
+    fetchData();
+  }, [navigate, dispatch]);
   // redux 데이터
   const lettersData = useSelector((state) => {
     return state.fanLettersReducer;
   });
 
-  // dispatch
-  const dispatch = useDispatch();
-
   // 팬레터 추가 버튼
-  const addButton = ({
-    userName,
-    detail,
-    iveMember,
-    setUserName,
-    setDetail,
-  }) => {
+  const addButton = ({ detail, iveMember, setDetail, loginUser }) => {
     const newLetter = {
       date: Date(),
-      name: userName,
+      name: loginUser.nickname,
       avatar:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaW3SfW7ZP7a7QSiL5_hliZmyZukjKufZQwg&usqp=CAU",
       detail,
       iveName: iveMember,
       id: crypto.randomUUID(),
     };
-    if (
-      newLetter.name.length <= 0 ||
-      newLetter.name.length > 20 ||
-      newLetter.detail.length <= 0 ||
-      newLetter.detail.length > 100
-    ) {
+    if (newLetter.detail.length <= 0 || newLetter.detail.length > 100) {
       alert(
         "닉네임, 내용이 공백 또는 형식에 맞지 않습니다.(닉네임 최대 20자 / 내용 최대 100자)"
       );
     } else {
       dispatch(addLetter(newLetter));
-      setUserName("");
       setDetail("");
     }
   };
