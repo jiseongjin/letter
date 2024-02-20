@@ -1,9 +1,10 @@
-import { createStore, combineReducers } from "redux";
 import fanLettersReducer from "../modules/fanLettersReducer";
+import { configureStore } from "@reduxjs/toolkit";
 
-const rootReducer = combineReducers({
-  fanLettersReducer,
+const store = configureStore({
+  reducer: {
+    fanLettersReducer,
+  },
 });
-const store = createStore(rootReducer);
 
 export default store;

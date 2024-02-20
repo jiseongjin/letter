@@ -5,14 +5,13 @@ import Fanletters from "./Fanletters";
 import IveMembers from "./IveMembers";
 import FanletterWrite from "./FanletterWrite";
 import { useDispatch, useSelector } from "react-redux";
-import { letterPlus } from "../../shared/redux/modules/fanLettersReducer.js";
+import { addLetter } from "../../shared/redux/modules/fanLettersReducer.js";
 
 function FanletterMain() {
   // redux 데이터
   const reduxData = useSelector((state) => {
     return state.fanLettersReducer;
   });
-  // console.log(reduxData);
 
   // dispatch
   const dispatch = useDispatch();
@@ -38,7 +37,7 @@ function FanletterMain() {
         "닉네임, 내용이 공백 또는 형식에 맞지 않습니다.(닉네임 최대 20자 / 내용 최대 100자)"
       );
     } else {
-      dispatch(letterPlus(newLetter));
+      dispatch(addLetter(newLetter));
     }
   };
 

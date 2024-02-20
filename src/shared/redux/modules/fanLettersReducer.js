@@ -1,41 +1,21 @@
+import { createSlice } from "@reduxjs/toolkit";
 import fakeData from "assets/fakeData.json";
 
-const LETER_PLUS = "PLUS";
-const EDIT = "EDIT";
-const DELETE = "DELETE";
-
-export const letterPlus = (newLetter) => {
-  return {
-    type: LETER_PLUS,
-    payload: newLetter,
-  };
-};
-
-export const editedButton = (addFanLetter) => {
-  return {
-    type: EDIT,
-    payload: addFanLetter,
-  };
-};
-
-export const deleteLetter = (updatFanletters) => {
-  return {
-    type: DELETE,
-    payload: updatFanletters,
-  };
-};
-
-const fanLettersReducer = (state = fakeData, action) => {
-  switch (action.type) {
-    case LETER_PLUS:
-      return [...state, action.payload];
-    case EDIT:
+const letterSlice = createSlice({
+  name: "letters",
+  initialState: fakeData,
+  reducers: {
+    addLetter: (state, action) => {
+      state.push(action.payload);
+    },
+    deleteLetter: (state, action) => {
       return action.payload;
-    case DELETE:
+    },
+    editedButton: (state, action) => {
       return action.payload;
-    default:
-      return state;
-  }
-};
+    },
+  },
+});
 
-export default fanLettersReducer;
+export default letterSlice.reducer;
+export const { addLetter, deleteLetter, editedButton } = letterSlice.actions;

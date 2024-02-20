@@ -28,8 +28,7 @@ function DetailFanletter() {
   const navigate = useNavigate();
   const location = useLocation();
   const foundData = location.state.item;
-
-  console.log(foundData);
+  console.log(navigate);
 
   const [onFix, setOnFix] = useState(true);
 
