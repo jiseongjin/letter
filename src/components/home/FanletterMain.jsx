@@ -4,23 +4,19 @@ import { Main, NoFanletter } from "../styled/Styled";
 import Fanletters from "./Fanletters";
 import IveMembers from "./IveMembers";
 import FanletterWrite from "./FanletterWrite";
-import { useDispatch } from "react-redux";
-import { addLetter } from "../../shared/redux/modules/fanLettersReducer.js";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { liginData } from "shared/redux/modules/authSlice";
+import { addLetters, getLetters } from "shared/redux/modules/lettersSlice";
+import { addLetter } from "shared/redux/modules/fanLettersReducer";
 
 function FanletterMain() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [letters, setLetters] = useState(null);
-
-  const fetchLetters = async () => {
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}?_sort=createdAt,-views`
-    );
-    setLetters(data.reverse());
-  };
+  const letters = useSelector((state) => {
+    return state.lettersSlice;
+  });
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -44,6 +40,13 @@ function FanletterMain() {
     fetchLetters();
   }, [navigate, dispatch]);
 
+  const fetchLetters = async () => {
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_SERVER_URL}?_sort=createdAt,-views`
+    );
+    dispatch(getLetters(data.reverse()));
+  };
+
   // 팬레터 추가 버튼
   const addButton = async ({ content, iveMember, setContent, loginUser }) => {
     const newLetter = {
@@ -61,7 +64,7 @@ function FanletterMain() {
       );
     } else {
       axios.post(process.env.REACT_APP_SERVER_URL, newLetter);
-      setLetters([newLetter, ...letters]);
+      dispatch(addLetters(newLetter));
       setContent("");
     }
   };

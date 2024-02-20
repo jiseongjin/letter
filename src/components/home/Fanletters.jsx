@@ -10,7 +10,7 @@ import {
 const Fanletters = ({ item }) => {
   return (
     // 디테일 페이지 이동
-    <Link to={`/detail/${item.id}`} state={{ item }}>
+    <Link to={`/detail/${item.id}`}>
       <FanLetterList>
         <Fanletter>
           <Profile src={item.avatar} alt="" />
