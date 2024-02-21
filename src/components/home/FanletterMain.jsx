@@ -9,7 +9,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { liginData } from "shared/redux/modules/authSlice";
 import { addLetters, getLetters } from "shared/redux/modules/lettersSlice";
-import { addLetter } from "shared/redux/modules/fanLettersReducer";
 
 function FanletterMain() {
   const dispatch = useDispatch();
