@@ -49,6 +49,10 @@ function DetailFanletter() {
     return state.lettersSlice;
   });
 
+  const getuser = useSelector((state) => {
+    return state.authSlice;
+  });
+
   const fetchLetters = async () => {
     const { data } = await axios.get(
       `${process.env.REACT_APP_SERVER_URL}?_sort=createdAt,-views`
@@ -87,6 +91,7 @@ function DetailFanletter() {
       navigate("/home");
     }
   };
+  console.log(foundLettr.userId, getuser.id);
   return (
     <>
       <Link to={"/home"}>
@@ -107,20 +112,22 @@ function DetailFanletter() {
               {editText}
             </Detail>
           </section>
-          <DetailBoxButtons>
-            {onFix ? (
-              <>
-                <BoxButton onClick={editButton}>수정</BoxButton>
-                <BoxButton onClick={() => deleteButton(foundLettr.id)}>
-                  삭제
+          {foundLettr.userId === getuser.id ? (
+            <DetailBoxButtons>
+              {onFix ? (
+                <>
+                  <BoxButton onClick={editButton}>수정</BoxButton>
+                  <BoxButton onClick={() => deleteButton(foundLettr.id)}>
+                    삭제
+                  </BoxButton>
+                </>
+              ) : (
+                <BoxButton onClick={() => updateButton(foundLettr.id)}>
+                  수정완료
                 </BoxButton>
-              </>
-            ) : (
-              <BoxButton onClick={() => updateButton(foundLettr.id)}>
-                수정완료
-              </BoxButton>
-            )}
-          </DetailBoxButtons>
+              )}
+            </DetailBoxButtons>
+          ) : null}
         </LetterDetailBox>
       </DetailMain>
     </>
